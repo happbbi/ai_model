@@ -8,12 +8,18 @@ import tensorflow as tf
 from tensorflow.keras import layers, models, optimizers
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import os
 
-# -----------------------------
-# 한글 폰트 설정
-# -----------------------------
 def 한글폰트설정():
-    # 리눅스 서버(Streamlit Cloud)에 설치되는 나눔고딕을 최우선으로 지정합니다.
+    # 폰트 캐시 파일 삭제 (서버 재부팅 시 폰트 재인식 유도)
+    cache_dir = fm.get_cachedir()
+    for file in os.listdir(cache_dir):
+        if 'fontlist' in file:
+            try:
+                os.remove(os.path.join(cache_dir, file))
+            except:
+                pass
+
     후보 = ["NanumGothic", "Malgun Gothic", "AppleGothic", "Noto Sans CJK KR"]
     사용가능 = {f.name for f in fm.fontManager.ttflist}
 
