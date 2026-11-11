@@ -8,20 +8,13 @@ import tensorflow as tf
 from tensorflow.keras import layers, models, optimizers
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import os
 
 def 한글폰트설정():
-    # 폰트 캐시 파일 삭제 (서버 재부팅 시 폰트 재인식 유도)
-    cache_dir = fm.get_cachedir()
-    for file in os.listdir(cache_dir):
-        if 'fontlist' in file:
-            try:
-                os.remove(os.path.join(cache_dir, file))
-            except:
-                pass
-
+    # 리눅스 서버(Streamlit Cloud)의 'fonts-nanum'과 로컬(Windows/Mac) 폰트 모두 지원
     후보 = ["NanumGothic", "Malgun Gothic", "AppleGothic", "Noto Sans CJK KR"]
-    사용가능 = {f.name for f in fm.fontManager.ttflist}
+    
+    # 시스템에 설치된 사용 가능한 폰트 이름 목록 가져오기
+    사용가능 = [f.name for f in fm.fontManager.ttflist]
 
     for 폰트 in 후보:
         if 폰트 in 사용가능:
@@ -31,7 +24,6 @@ def 한글폰트설정():
     plt.rcParams["axes.unicode_minus"] = False
 
 한글폰트설정()
-
 st.set_page_config(
     page_title="고등학생 AI 실습 플랫폼",
     page_icon="🧠",
