@@ -13,7 +13,8 @@ from sklearn.preprocessing import StandardScaler
 # 한글 폰트 설정
 # -----------------------------
 def 한글폰트설정():
-    후보 = ["Malgun Gothic", "NanumGothic", "AppleGothic", "Noto Sans CJK KR"]
+    # 리눅스 서버(Streamlit Cloud)에 설치되는 나눔고딕을 최우선으로 지정합니다.
+    후보 = ["NanumGothic", "Malgun Gothic", "AppleGothic", "Noto Sans CJK KR"]
     사용가능 = {f.name for f in fm.fontManager.ttflist}
 
     for 폰트 in 후보:
